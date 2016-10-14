@@ -1,20 +1,22 @@
-import java.util.Scanner;
-class Hello6{  
-  public static void main(String[] args)  {  
-    int c=0,a,temp;  
-	for(int n=100;n<1000;n++)
+//import java.util.Scanner;
+public class Hello6
+{
+	public static void main(String args[])
 	{
-    temp=n;  
-	
-    while(n>0)  
-    {  
-    a=n%10;  
-    n=n/10;  
-    c=c+(a*a*a);  
-    }  
-    if(temp==c)  
-    System.out.println("armstrong number"+n);   
-    
+		for(int i=100;i<=999;i++)
+		{
+			int n = i;
+			int arm=0;
+			while(n>0)
+			{
+				int a = n%10;
+				arm = arm+(a*a*a);
+				n = n/10;
+			}
+			if(i==arm)
+			{
+				System.out.print(i+" ");
+			}
+		}
 	}
-   }  
-}  
+}
