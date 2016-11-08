@@ -1,9 +1,6 @@
 package com.chat;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,8 +17,8 @@ public class ChattingRoom {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="Rid")
-	private int id;
+	@Column(name="rid")
+	private int rid;
 	@Column(name="roomname")
 	private String roomname;
 	
@@ -33,31 +30,29 @@ public class ChattingRoom {
 	}
 	
 	public int getId(){
-		return this.id;
+		return this.rid;
 	}
 	public String getRoomName(){
 		return this.roomname;
 	}
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "Room_Users", joinColumns = { @JoinColumn(name = "Rid") }, inverseJoinColumns = { @JoinColumn(name = "Uid") })
-	private Set<Users> s;
-	public void addUsers(Users s) {
-	//	System.out.println(s);
-	   // if (!getUsers().contains(s)) {
-	    	getUsers().add(s);
-	   // }
-	  // // if (!s.getChattingRoom().contains(this)) {
-		  //    s.getChattingRoom().add(this);
-		 //   }
-	    
-	  }
-	 public Collection<Users> getUsers() {
-		    return s;
-		  }
-	public void setUsers(Set<Users> s) {
-		this.s = s;
+	private Collection<Users> userList;
+	private Collection<Message> msgList;
+	
+   public Collection<Message> getMessage() {
+	      return msgList;
+   }
+   public void setMessage(Message e ) {
+	      this.msgList.add(e);
+   }
+   public Collection<Users> getUsers() {
+	   	return userList;
+   }
+	public void setUsers(Users u) {
+		this.userList.add(u);
 	}
 	public String toString(){
-		return id+"--"+roomname;
+		return rid+"--"+roomname;
 	}
 }

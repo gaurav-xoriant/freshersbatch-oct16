@@ -1,13 +1,15 @@
 package com.chat;
 
 import java.util.Collection;
-import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,7 +18,7 @@ public class Users {
 
 	@Id
 	@GeneratedValue
-	@Column(name="Uid")
+	@Column(name="uid")
 	private int id;
 	
 	@Column(name="name")
@@ -24,33 +26,52 @@ public class Users {
 	
 	@Column(name="password")
 	private String pswd;
-	@ManyToMany(mappedBy="s")
-	private Set<ChattingRoom> cr;
 	
-	public void setName(String name){
-		this.name=name;
+	@ManyToMany(mappedBy="userList")
+	private Collection<ChattingRoom> crList;
+	
+	@OneToOne (cascade = { CascadeType.ALL })
+	@JoinColumn(name="msg_id")
+	private Message msg_id;
+
+	public int getId() {
+		return id;
 	}
-	public void setPassword(String pswd){
-		this.pswd=pswd;
+
+	public String getName() {
+		return name;
 	}
-	public int getId(){
-		return this.id;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getName(){
-		return this.name;
+
+	public String getPswd() {
+		return pswd;
 	}
-	public void addChatRoom(ChattingRoom cr) {
-	      if (!getChattingRoom().contains(cr)) {
-	    	  getChattingRoom().add(cr);
-	      }
-	      if (!cr.getUsers().contains(this)) {
-	    	  cr.getUsers().add(this);
-	      }
-	    }
-	    public Collection<ChattingRoom> getChattingRoom() {
-	      return cr;
-	    }
-	public String toString(){
-		return id+"--"+name;
+
+	public void setPswd(String pswd) {
+		this.pswd = pswd;
+	}
+
+	public Collection<ChattingRoom> getCrList() {
+		return crList;
+	}
+
+	public void setCrList(Collection<ChattingRoom> crList) {
+		this.crList = crList;
+	}
+
+	public Message getMsg_id() {
+		return msg_id;
+	}
+
+	public void setMsg_id(Message msg_id) {
+		this.msg_id = msg_id;
+	}
+	@Override
+	public String toString() {
+		return "Users [id=" + id + ", name=" + name + ", pswd=" + pswd + ", crList=" + crList + ", msg_id=" + msg_id
+				+ "]";
 	}
 }

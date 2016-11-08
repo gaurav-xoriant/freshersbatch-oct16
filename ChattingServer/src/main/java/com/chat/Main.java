@@ -15,7 +15,20 @@ public class Main {
 		Configuration configuration = new Configuration();
 		configuration.configure("hibernate.cfg.xml");
 		SessionFactory sessionFactory = configuration.buildSessionFactory();
-	
+		Session s=sessionFactory.openSession();
+		Transaction t=s.beginTransaction();
+		Users u=new Users();
+		ChattingRoom c=new ChattingRoom();
+		Message m=new Message();
+		u.setName("ABC");
+		c.setRoomName("sports");
+		m.setMessage("hello how are you");
+		c.setMessage(m);
+		c.setUsers(u);
+		t.commit();
+		s.close();
+		
+		/*
 			System.out.println("Enter the options you want to choose");
 			System.out.println("1 Create a chatroom \n"
 					+ "2 Send a message \n"
@@ -26,32 +39,36 @@ public class Main {
 					+ "7 Delete the chat room \n"
 					+ " Please enter your option:");
 			int choice=sc.nextInt();
+			
 			switch (choice) {
 			case 1:System.out.println("Creating chatroom");
-					Session session2 = sessionFactory.openSession();
-					Transaction transaction2=session2.beginTransaction();
-					
-		   		   	Users u=new Users();
-		   		   	
-		   		   	System.out.println("Enter the name of user");
-		   		   	String uname=sc.next();
-					System.out.println("Enter password");
-					String pswd=sc.next();
-					u.setName(uname);
-					u.setPassword(pswd);
-				    System.out.println("Enter the name of ChatRoom");
-				    String roomname=sc.next();
-				    ChattingRoom cr=new ChattingRoom();
-				    cr.setRoomName(roomname);
-				    session2.persist(u);
-				    cr.addUsers(u);
-				    session2.persist(cr);
-				    transaction2.commit();
-				    session2.close();
-				break;			
+						Session session1 = sessionFactory.openSession();
+						Transaction transaction1=session1.beginTransaction();
+					    System.out.println("Enter the name of ChatRoom");
+					    String roomname=sc.next();
+					    ChattingRoom cr=new ChattingRoom();
+					    cr.setRoomName(roomname);
+					    session1.persist(cr);
+					    transaction1.commit();
+					    session1.close();
+				break;
+			case 2:System.out.println("Creating user");
+						Session session2 = sessionFactory.openSession();
+						Transaction transaction2=session2.beginTransaction();
+					    System.out.println("Enter the name of user");
+					    String uname=sc.next();
+					    System.out.println("Enter the pswd of user");
+					    String pswd=sc.next();
+					    Users u=new Users();
+					    u.setName(uname);
+					    u.setPassword(pswd);
+					    session2.persist(u);
+					    transaction2.commit();
+					    session2.close();
+			    break;			
 			default:
 				break;
-			}
+			}*/
 		sc.close();
 	}
 

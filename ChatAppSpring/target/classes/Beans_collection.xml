@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+	<bean id="message1" class="com.springChatApp.Message" >
+	    <property name="msgid" value="1"></property>
+	    <property name="msg" value="hello"></property>    
+	</bean>
+	<bean id="message2" class="com.springChatApp.Message" >
+	    <property name="msgid" value="2"></property>
+	    <property name="msg" value="hello 2"></property>    
+	</bean>
+	<bean id="user1" class="com.springChatApp.User" >
+	<property name="userid" value="1"></property>
+	<property name="name" value="shyam"></property>    
+	</bean>
+	<bean id="user2" class="com.springChatApp.User" >
+	    <property name="userid" value="2"></property>
+	    <property name="name" value="ram"></property>    
+	</bean>
+	<bean id="room1" class="com.springChatApp.ChatAppSpring" >
+	<property name="rid" value="1"></property>
+	<property name="name" value="sports"></property>
+	<property name="users">
+	<set>
+	<ref="user1"/>
+	<ref="user2"/>
+	</set>
+	</property> 
+	<property name="message">
+	<set>
+	<ref=message1/>
+	<ref=message2/>
+	</set>
+	</property>    
+	</bean>
+</beans>

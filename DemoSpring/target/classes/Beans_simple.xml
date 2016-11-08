@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+	
+	<bean id="item1" class="com.springdemo.Item">
+		<property name="name" value="fan"/>
+		<property name="price" value="100"/>
+	</bean>
+	
+	<bean id="item2" class="com.springdemo.Item">
+		<property name="name" value="cooler"/>
+		<property name="price" value="100"/>
+	</bean>
+	
+	<bean id="item3" class="com.springdemo.Item">
+		<property name="name" value="ac"/>
+		<property name="price" value="100"/>
+	</bean>
+	
+	<bean id="item4" class="com.springdemo.Item">
+		<property name="name" value="mobile"/>
+		<property name="price" value="100"/>
+	</bean>
+	<bean id="order1" class="com.springdemo.Orders">
+		<property name="id" value="1"/>
+		<property name="item" ref="item1"/>
+	</bean>
+	
+	<bean id="order2" class="com.springdemo.Orders">
+		<property name="id" value="2"/>
+		<property name="item" ref="item2"/>
+	</bean>
+	
+	<bean id="order3" class="com.springdemo.Orders">
+		<property name="id" value="3"/>
+		<property name="item" ref="item3"/>
+	</bean>
+	
+	<bean id="order4" class="com.springdemo.Orders">
+		<property name="id" value="4"/>
+		<property name="item" ref="item4"/>
+	</bean>
+
+	<bean class="com.springdemo.Orders" />
+	<bean class="com.springdemo.Item" />
+ 
+
+</beans>
